@@ -3,6 +3,16 @@
 //  BookManagerKit
 //
 //  Created by Kit Sitou on 4/30/26.
-//
+//api is the bridge of 2 things
 
-import Foundation
+func getBooks()-> [Book] {
+    return [
+        Book(title: "Book Title 1", author: "Author 1", coverImage: "lotr_fellowship", summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "),
+        
+        Book(title: "Book Title 2", author: "Author 2", coverImage: "lotr_king", summary: "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. "),
+        
+        Book(title: "Book Title 3", author: "Author 3", coverImage: "lotr_towers", summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit")
+    ]
+    
+    
+}

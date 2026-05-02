@@ -8,20 +8,19 @@
 import SwiftUI
 
 struct BookDetailView: View {
-    var book:Book
+    @Binding var book:Book
     
     
     
     var body: some View {
 //        Text(book.summary)
         NavigationStack{
-            VStack(alignment: .leading){
+            VStack{
                 HStack{
                     Image(book.coverImage)
                         .resizable()
                         .scaledToFit()
-                        .frame(width:100, height:150)
-                    
+                        .frame(width:100, height:140)
                     
                     VStack(alignment: .leading){
                         HStack{
@@ -38,16 +37,22 @@ struct BookDetailView: View {
                         }.foregroundStyle(.secondary)
                     }
                     
-                }//END: Hstack
+                }.frame(width:320, height:150)
+                .padding()
+                //END: Hstack
                 VStack{
                     Text("Summary")
                         .font(.headline)
                         .padding(.bottom)
                     
                     Text(book.summary)
-                }
-                .padding()
-                .background(.gray.opacity(0.3))
+                    
+                    Spacer()
+                    Button("Edit Book"){
+                        book.title = "New Book Here"
+                    }
+                }.frame(width:320, height:420)                .padding()
+                .background(.gray.opacity(0.2))
                 .cornerRadius(10)
                 Spacer()
                 

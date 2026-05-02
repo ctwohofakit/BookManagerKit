@@ -8,11 +8,29 @@
 import SwiftUI
 
 struct BookListItem: View {
+    
+    
+    var book: Book
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack{
+            Image(book.coverImage)
+                .resizable()
+                .scaledToFit()
+                .frame(width:60, height:80)
+            VStack(alignment: .leading){
+                Text(book.title)
+                    .font(.headline)
+                Text("by \(book.author)")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+        }
     }
 }
 
+
+//tool that acts like a parent view
 #Preview {
-    BookListItem()
+    BookListItem(book: Book(title: "title", author: "author", coverImage: "lotr_fellowship", summary: "summary"))
 }

@@ -10,35 +10,36 @@ import SwiftUI
 
 struct ContentView: View {
     //mocking data
-    var books = [
-        Book(title: "Book Title 1", author: "Author 1", coverImage: "lotr_fellowship", summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "),
-        
-        Book(title: "Book Title 2", author: "Author 2", coverImage: "lotr_king", summary: "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. "),
-        
-        Book(title: "Book Title 3", author: "Author 3", coverImage: "lotr_towers", summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit")
-    ]
+    //saves new Books
+    @State private var books = getBooks()
+    
+    //controls the ADDBook
+    @State private var showAddBook:Bool = false
+    @State private var newBook = Book(title: "", author: "", coverImage: "lotr_fellowship", summary: "")
     
     var body: some View {
         //imperative vs declarative programming
         NavigationStack{
-            List(books , id:\.self.title){book in
+            List($books){ book in
                 NavigationLink(destination: BookDetailView(book: book)){
-                    HStack{
-                        Image(book.coverImage)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width:60, height:80)
-                        VStack(alignment: .leading){
-                            Text(book.title)
-                                .font(.headline)
-                            Text(book.author)
-                                .font(.subheadline)
-                                .foregroundStyle(.secondary)
-                        }
-                    }
+                    BookListItem(book: book.wrappedValue)
                 }
-            }.navigationTitle("Book Manager")
-            
+                
+            }
+            .navigationTitle("Book Manager")
+            .navigationBarItems(trailing: Button("Add View"){
+                        //toggle change the state to be true
+                        showAddBook.toggle()
+                
+                })
+                .sheet(isPresented: $showAddBook){
+                        if (!newBook.title.isEmpty){
+                            books.append(newBook)
+                        }
+                        newBook = Book(title: "", author: "", coverImage: "lotr_fellowship", summary: "")
+                        } content:{
+                        AddEditView(book: $newBook)
+                }
         }
         
     }
@@ -46,6 +47,7 @@ struct ContentView: View {
 }
 
 #Preview {
+    
     ContentView()
 //        .modelContainer(for: Item.self, inMemory: true)
 }
