@@ -15,7 +15,7 @@ struct ContentView: View {
     
     //controls the ADDBook
     @State private var showAddBook:Bool = false
-    @State private var newBook = Book(title: "", author: "", coverImage: "lotr_fellowship", summary: "")
+    @State private var newBook = Book(title: "", author: "", coverImage: "lotr_fellowship", summary: "", rating: 0, review:"")
     
     var body: some View {
         //imperative vs declarative programming
@@ -36,7 +36,7 @@ struct ContentView: View {
                         if (!newBook.title.isEmpty){
                             books.append(newBook)
                         }
-                        newBook = Book(title: "", author: "", coverImage: "lotr_fellowship", summary: "")
+                        newBook = Book(title: "", author: "", coverImage: "lotr_fellowship", summary: "", rating: 1, review:"")
                         } content:{
                         AddEditView(book: $newBook)
                 }

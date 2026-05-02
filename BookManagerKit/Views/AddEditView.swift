@@ -16,6 +16,8 @@ struct AddEditView: View {
     @State var author:String = ""
     @State var summary:String = ""
     @State var selectedCover:String = "lotr_fellowship"
+    @State var rating:Int = 0
+    @State var review:String = ""
     
     
     var body: some View {
@@ -51,7 +53,7 @@ struct AddEditView: View {
 
 //Parent View
 #Preview {
-    @State var book = Book(title: "", author: "", coverImage: "", summary: "")
+    @State var book = Book(title: "", author: "", coverImage: "", summary: "", rating:3, review:"")
     NavigationStack{
         AddEditView(book: $book)
     }

@@ -9,18 +9,18 @@ import SwiftUI
 
 struct BookDetailView: View {
     @Binding var book:Book
-    
+    @State private var showEditBook:Bool = false
     
     
     var body: some View {
 //        Text(book.summary)
         NavigationStack{
-            VStack{
+            VStack(alignment: .leading){
                 HStack{
                     Image(book.coverImage)
                         .resizable()
                         .scaledToFit()
-                        .frame(width:100, height:140)
+                        .frame(width:100, height:100)
                     
                     VStack(alignment: .leading){
                         HStack{
@@ -37,8 +37,8 @@ struct BookDetailView: View {
                         }.foregroundStyle(.secondary)
                     }
                     
-                }.frame(width:320, height:150)
-                .padding()
+                }.frame(height:150)
+               
                 //END: Hstack
                 VStack{
                     Text("Summary")
@@ -48,20 +48,53 @@ struct BookDetailView: View {
                     Text(book.summary)
                     
                     Spacer()
-                    Button("Edit Book"){
-                        book.title = "New Book Here"
-                    }
-                }.frame(width:320, height:420)                .padding()
+//                    Button("Edit Book"){
+//                        book.title = "New Book Here"
+//                    }
+                
+                }.frame(width:320, height:150)
+                .padding()
                 .background(.gray.opacity(0.2))
                 .cornerRadius(10)
-                Spacer()
-                
+            
+                VStack(alignment: .center){
+                    Text("My Review")
+                        .font(.headline)
+                    HStack{
+//                        Text("\(book.rating)")
+//                            .bold()
+//                            .font(.subheadline)
+                        ForEach(0..<book.rating, id: \.self){_ in
+                            Text("★")
+                        }
+                    }.foregroundStyle(.blue)
+                    Text("\(book.review)")
+                    Spacer()
+                    
+                }
+                    .frame(width:320, height:200)
+                    .padding()
+                    .background(.gray.opacity(0.2))
+                    .cornerRadius(10)
             }.padding()
-        }.navigationTitle("Book Details")
-            .navigationBarTitleDisplayMode(.inline)
+            Spacer()
+//        NavigationLink(destination: EditBookView(book: $book)){
+//            Button("Edit Book"){}
+        }
+        .navigationTitle("Book Details")
+        .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(trailing: Button("Edit"){
+                showEditBook.toggle()
+            }).sheet(isPresented: $showEditBook){
+                
+            }content:{
+                EditBookView(book: $book)
+            }
+        }
+
         
     }
-}
+
 
 
 #Preview {
