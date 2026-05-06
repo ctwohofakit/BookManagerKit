@@ -9,6 +9,8 @@ import SwiftUI
 
 struct EditBookView: View {
     @Binding var book: Book
+    
+    
     @State var title:String = ""
     @State var author:String = ""
     @State var summary:String = ""
@@ -34,8 +36,7 @@ struct EditBookView: View {
                             Text("The Two Tower").tag("lotr_towers")
                         }
                     }
-                }
-                Form{
+                    
                     Section(header:Text("My Rating and Review")){
                         Picker("Rating", selection:$book.rating){
                             Text("★").tag(1)

@@ -3,12 +3,14 @@
 //  BookManagerKit
 //
 //  Created by Kit Sitou on 4/30/26.
-//
+// edit touch
 
 import SwiftUI
 
 struct BookDetailsView: View {
     @Binding var book: Book
+    
+    @State private var showEditSheet: Bool = false
     
     var body: some View {
         VStack(alignment: .leading){
@@ -16,7 +18,7 @@ struct BookDetailsView: View {
                 Image(book.coverImage)
                     .resizable()
                     .scaledToFit()
-                    .frame(width:100, height:150)
+                    .frame(maxWidth:100, maxHeight:150)
                 
                 
                 VStack(alignment: .leading){
@@ -35,26 +37,52 @@ struct BookDetailsView: View {
                 }
                 
             }//END: Hstack
-            VStack{
-                Text("Summary")
-                    .font(.headline)
-                    .padding(.bottom)
-                
-                Text(book.summary)
-                Button("Edit Book"){
-                    book.title = "New Book Here"
-                }
+            VStack(alignment: .center){
+             
+            BookDetailCard(title: "Summary", text: book.summary)
+//            BookDetailCard(tile:"Review",text: book.review,){}
             }
-            .padding()
-            .background(.gray.opacity(0.3))
-            .cornerRadius(10)
+            
+            VStack(alignment: .center){
+                Text("My Review")
+                    .font(.headline)
+                HStack{
+//                        Text("\(book.rating)")
+//                            .bold()
+//                            .font(.subheadline)
+                    ForEach(0..<book.rating, id: \.self){_ in
+                        Text("★")
+                    }
+                }.foregroundStyle(.blue)
+                Text("\(book.review)")
+                Spacer()
+                
+                }
+                .frame(maxWidth:320, maxHeight:210)
+                .padding()
+                .background(.gray.opacity(0.2))
+                .cornerRadius(10)
+            }.padding()
             Spacer()
             
-        }.padding()
+           .navigationBarTitleDisplayMode(.inline)
+                .navigationBarItems(trailing: Button("Edit"){
+                    showEditSheet.toggle()
+                }).sheet(isPresented: $showEditSheet){
+                    
+                }content:{
+//                    EditBookView(book: $book)
+                    AddEditView(book: $book)
+                }
+            }
+
     }
     
+
+
+#Preview {
+    
+    ContentView()
+//        .modelContainer(for: Item.self, inMemory: true)
 }
 
-//#Preview {
-//    BookDetailsView(book: Book(title: "Book Title 1", author: "Author 1", coverImage: "lotr_fellowship", summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "))
-//}

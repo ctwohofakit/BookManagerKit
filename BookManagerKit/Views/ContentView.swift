@@ -14,20 +14,23 @@ struct ContentView: View {
     @State private var books = getBooks()
     
     //controls the ADDBook
+    //State varible, if state update, it will re-render
     @State private var showAddBook:Bool = false
-    @State private var newBook = Book(title: "", author: "", coverImage: "lotr_fellowship", summary: "", rating: 0, review:"")
+    @State private var newBook = Book(title: "", author: "", coverImage: "lotr_fellowship", summary: "", rating: 1, review:"")
     
     var body: some View {
         //imperative vs declarative programming
         NavigationStack{
+            
+            Text(newBook.title)
             List($books){ book in
-                NavigationLink(destination: BookDetailView(book: book)){
+                NavigationLink(destination: BookDetailsView(book: book)){
                     BookListItem(book: book.wrappedValue)
                 }
                 
             }
             .navigationTitle("Book Manager")
-            .navigationBarItems(trailing: Button("Add View"){
+            .navigationBarItems(trailing: Button("Add"){
                         //toggle change the state to be true
                         showAddBook.toggle()
                 
@@ -36,6 +39,7 @@ struct ContentView: View {
                         if (!newBook.title.isEmpty){
                             books.append(newBook)
                         }
+                    //create new book with the new id
                         newBook = Book(title: "", author: "", coverImage: "lotr_fellowship", summary: "", rating: 1, review:"")
                         } content:{
                         AddEditView(book: $newBook)

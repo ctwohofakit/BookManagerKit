@@ -4,6 +4,7 @@
 //
 //  Created by Kit Sitou on 4/28/26.
 //
+// Text("edit touch")
 
 import SwiftUI
 
@@ -97,7 +98,7 @@ struct BookDetailView: View {
 
 
 
-#Preview {
-    ContentView()
-//        .modelContainer(for: Item.self, inMemory: true)
-}
+//#Preview {
+//    ContentView()
+////        .modelContainer(for: Item.self, inMemory: true)
+//}
