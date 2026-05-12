@@ -22,6 +22,7 @@ struct BookDetailsView: View {
                 
                 
                 VStack(alignment: .leading){
+                    Spacer()
                     HStack{
                         Image(systemName: "book.pages.fill")
                         Text(book.title)
@@ -34,14 +35,36 @@ struct BookDetailsView: View {
                             .font(.subheadline)
                             .bold()
                     }.foregroundStyle(.secondary)
+                    HStack{
+                        ColoredCapsule(text: book.genre.rawValue)
+                        ColoredCapsule(text: book.readingStatus.rawValue, color: .green)
+                    }
+                    
+                    Spacer()
+                    
+                    
+                    
+                    
+                    //MARK: ---favorite toggle---
+                    HStack{
+                        Spacer()
+                        FavoriteToggle(isFavorite: $book.isFavorite)
+                        
+                    }
+                    .padding()
+                    Spacer()
+                    
                 }
-                
+                .frame(maxWidth: .infinity , maxHeight:150)
+               
             }//END: Hstack
             VStack(alignment: .center){
              
             BookDetailCard(title: "Summary", text: book.summary)
 //            BookDetailCard(tile:"Review",text: book.review,){}
             }
+           
+            .frame(maxWidth:400, maxHeight:210)
             
             VStack(alignment: .center){
                 Text("My Review")
@@ -55,16 +78,19 @@ struct BookDetailsView: View {
                     }
                 }.foregroundStyle(.blue)
                 Text("\(book.review)")
+                    .padding()
                 Spacer()
-                
+              
                 }
-                .frame(maxWidth:320, maxHeight:210)
-                .padding()
+                .frame(maxWidth:400, maxHeight:210)
                 .background(.gray.opacity(0.2))
                 .cornerRadius(10)
-            }.padding()
-            Spacer()
-            
+            }
+        
+            .padding()
+                Spacer()
+            .navigationTitle("Book Details")
+            .navigationTitle("Book Details")
            .navigationBarTitleDisplayMode(.inline)
                 .navigationBarItems(trailing: Button("Edit"){
                     showEditSheet.toggle()

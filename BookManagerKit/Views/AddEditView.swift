@@ -20,6 +20,9 @@ struct AddEditView: View {
     @State var selectedCover:String = "lotr_fellowship"
     @State var rating:Int = 0
     @State var review:String = ""
+    @State var isFavorite:Bool = false
+    @State var genre: Genre = .unknown
+    @State var readingStatus: ReadingStatus = .unknown
     
     
     //when using the self is from top down to check
@@ -33,6 +36,9 @@ struct AddEditView: View {
         self._selectedCover = .init(initialValue: book.wrappedValue.coverImage)
         self._rating = .init(initialValue: book.wrappedValue.rating)
         self._review = .init(initialValue: book.wrappedValue.review)
+        self._isFavorite = .init(initialValue: book.wrappedValue.isFavorite)
+        self._genre = . init(initialValue: book.wrappedValue.genre)
+        self._readingStatus = .init(initialValue: book.wrappedValue.readingStatus)
     }
     
     
@@ -45,6 +51,14 @@ struct AddEditView: View {
                     TextField("Author", text: $author)
                     TextEditor(text: $summary)
                         .frame(height:150)
+                    Picker("Genre", selection: $genre){
+                        //go to the Genre model
+                        ForEach(Genre.allCases, id:\.self){genre in
+                            Text(genre.rawValue).tag(genre)
+                            
+                        }
+                    }
+                    
                     Picker("Cover", selection: $selectedCover){
                         Text("The Fellowship of the ring").tag("lotr_fellowship")
                         Text("The Return of the king").tag("lotr_king")
@@ -52,18 +66,31 @@ struct AddEditView: View {
                     }
                 }
                 Section(header:Text("My Rating and Review")){
-                    Picker("Rating", selection:$rating){
-                        Text("★").tag(1)
-                        Text("★★").tag(2)
-                        Text("★★★").tag(3)
-                        Text("★★★★").tag(4)
-                        Text("★★★★★").tag(5)
-                    }.pickerStyle(.menu)
-                        
+                                        Picker("Rating", selection:$rating){
+                                            Text("★").tag(1)
+                                            Text("★★").tag(2)
+                                            Text("★★★").tag(3)
+                                            Text("★★★★").tag(4)
+                                            Text("★★★★★").tag(5)
+                                        }.pickerStyle(.menu)
+//                    HStack{
+//                        ForEach(1...5, id:\.self){ index in
+//                            Image(systemName: index <= rating ? "star.fill": "star")
+//                                .font(.title2)
+//                                .foregroundStyle(.yellow)
+//                            
+//                        }
+//                    }
+                    
+                    Picker("Reading Status", selection: $readingStatus){
+                        ForEach(ReadingStatus.allCases, id: \.self){ readingStatus in
+                            Text(readingStatus.rawValue).tag(readingStatus)
+                            
+                        }
+                    }
                     TextEditor(text: $review)
                         .frame(height:130)
-                    }
-                    
+                }
                     
                 }.background(.gray.opacity(0.1))
    
@@ -78,7 +105,8 @@ struct AddEditView: View {
                             book.summary = summary
                             book.rating = rating
                             book.review = review
-                            
+                            book.isFavorite = isFavorite
+                            book.genre = genre
                             
                             dismiss()
                         }.disabled(title.isEmpty)
@@ -87,6 +115,9 @@ struct AddEditView: View {
                         Button("Cancel"){
                             dismiss()
                         }
+                    }
+                    ToolbarItem(placement: .primaryAction){
+                        FavoriteToggle(isFavorite: $isFavorite, size:.subheadline, useAnimation:false)
                     }
                 }
         }
@@ -98,8 +129,5 @@ struct AddEditView: View {
 
 //Parent View
 #Preview {
-    @State var book4 = Book(title: "", author: "", coverImage: "", summary: "", rating:3, review:"")
-    NavigationStack{
-        AddEditView(book: $book4)
-    }
+ContentView()
 }

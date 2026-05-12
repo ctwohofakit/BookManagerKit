@@ -7,11 +7,11 @@
 
 func getBooks()-> [Book] {
     return [
-        Book(title: "Book Title 1", author: "Author 1", coverImage: "lotr_fellowship", summary: "Lorem ipsum dolor sit amet, consectetur adipiscing fghjkgh elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", rating: 3, review: "amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
+        Book(title: "Book Title 1", author: "Author 1", coverImage: "lotr_fellowship", summary: "Lorem ipsum dolor sit amet, consectetur adipiscing fghjkgh elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", rating: 3, review: "amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", isFavorite: true, genre: .fantasy, readingStatus: .reading),
         
-        Book(title: "Book Title 2", author: "Author 2", coverImage: "lotr_king", summary: "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used inm,mn,m, laying out print, graphic or web designs. ", rating: 4, review: "amet, consectetur adiphjlkliscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
+        Book(title: "Book Title 2", author: "Author 2", coverImage: "lotr_king", summary: "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used inm,mn,m, laying out print, graphic or web designs. ", rating: 4, review: "amet, consectetur adiphjlkliscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", isFavorite: false, genre: .horror, readingStatus: .planToRead),
         
-        Book(title: "Book Title 3", author: "Author 3", coverImage: "lotr_towers", summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",  rating: 5, review: "klbbvvamet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+        Book(title: "Book Title 3", author: "Author 3", coverImage: "lotr_towers", summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",  rating: 5, review: "klbbvvamet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", isFavorite: true, genre: .mystery, readingStatus: .dropped)
     ]
     
     

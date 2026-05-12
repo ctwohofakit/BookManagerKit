@@ -15,36 +15,62 @@ struct ContentView: View {
     
     //controls the ADDBook
     //State varible, if state update, it will re-render
+/*
     @State private var showAddBook:Bool = false
-    @State private var newBook = Book(title: "", author: "", coverImage: "lotr_fellowship", summary: "", rating: 1, review:"")
+    @State private var newBook = Book(title: "", author: "", coverImage: "lotr_fellowship", summary: "", rating: 1, review:"", isFavorite: false)*/
     
     var body: some View {
-        //imperative vs declarative programming
-        NavigationStack{
+//        TabView{
+            //example
+//            Tab{}
+            /*.tabItem{
+             
+            Label{"Books", systemImage:""}
+             */
             
-            Text(newBook.title)
-            List($books){ book in
-                NavigationLink(destination: BookDetailsView(book: book)){
-                    BookListItem(book: book.wrappedValue)
-                }
+            TabView{
+                BookListView(books: $books)
+                    .tabItem{
+                        Label("Books", systemImage: "books.vertical.fill")
+                    }
+                FavoritesView(books: $books)
+                    .tabItem{
+                        Label("Favorites", systemImage: "heart.fill")
+                    }
+                
+                
                 
             }
-            .navigationTitle("Book Manager")
-            .navigationBarItems(trailing: Button("Add"){
-                        //toggle change the state to be true
-                        showAddBook.toggle()
-                
-                })
-                .sheet(isPresented: $showAddBook){
-                        if (!newBook.title.isEmpty){
-                            books.append(newBook)
-                        }
-                    //create new book with the new id
-                        newBook = Book(title: "", author: "", coverImage: "lotr_fellowship", summary: "", rating: 1, review:"")
-                        } content:{
-                        AddEditView(book: $newBook)
-                }
-        }
+            
+        
+//        }
+        
+        //imperative vs declarative programming
+//        NavigationStack{
+//            
+//            Text(newBook.title)
+//            List($books){ book in
+//                NavigationLink(destination: BookDetailsView(book: book)){
+//                    BookListItem(book: book.wrappedValue)
+//                }
+//                
+//            }
+//            .navigationTitle("Book Manager")
+//            .navigationBarItems(trailing: Button("Add"){
+//                        //toggle change the state to be true
+//                        showAddBook.toggle()
+//                
+//                })
+//                .sheet(isPresented: $showAddBook){
+//                        if (!newBook.title.isEmpty){
+//                            books.append(newBook)
+//                        }
+//                    //create new book with the new id
+//                        newBook = Book(title: "", author: "", coverImage: "lotr_fellowship", summary: "", rating: 1, review:"",isFavorite: false)
+//                        } content:{
+//                        AddEditView(book: $newBook)
+//                }
+//        }
         
     }
     

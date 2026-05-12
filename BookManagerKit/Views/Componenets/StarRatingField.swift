@@ -19,7 +19,7 @@ struct StarRatingField: View {
                     Image(systemName: index <= rating ? "star.fill": "star")
                         .font(.title2)
                         .foregroundStyle(.yellow)
-                }
+                }.buttonStyle(.plain)
             }
         }
     }

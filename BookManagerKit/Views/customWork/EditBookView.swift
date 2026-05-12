@@ -77,8 +77,8 @@ struct EditBookView: View {
         
     }
 }
-
-#Preview {
-    @State var book = Book(title: "2 sheep", author: "tim", coverImage: "the", summary: "lorum sadfdasf fer", rating:3, review:"fasdfasdf")
-    EditBookView(book: $book)
-}
+//
+//#Preview {
+//    @State var book = Book(title: "2 sheep", author: "tim", coverImage: "the", summary: "lorum sadfdasf fer", rating:3, review:"fasdfasdf", isFavorite: true, genre: .romance, readingStatus: .dropped)
+//    EditBookView(book: $book)
+//}

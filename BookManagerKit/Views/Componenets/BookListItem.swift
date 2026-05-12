@@ -39,5 +39,5 @@ struct BookListItem: View {
 
 //tool that acts like a parent view
 #Preview {
-    BookListItem(book: Book(title: "title", author: "author", coverImage: "lotr_fellowship", summary: "summary", rating: 3, review:""))
+    BookListItem(book: Book(title: "title", author: "author", coverImage: "lotr_fellowship", summary: "summary", rating: 3, review:"", isFavorite:true, genre: .fantasy))
 }

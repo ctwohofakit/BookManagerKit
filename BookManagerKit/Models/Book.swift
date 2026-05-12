@@ -12,7 +12,25 @@ struct Book: Identifiable {
     var author: String
     var coverImage: String
     var summary: String
+    
+    //These are for assignment 2
     var rating: Int
     var review: String
+    
+    //106-1
+    var isFavorite: Bool
+    
+    //106-2
+    //genre
+    //readingStatus
+    var genre: Genre = .unknown
+    var readingStatus: ReadingStatus = .unknown
+    
+    
+    
+    
+    
 }
+
+//106-1
 
