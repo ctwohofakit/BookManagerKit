@@ -14,10 +14,16 @@ struct FavoritesView: View {
     @State var selectedGenre: Genre?
     @State var selectedStatus: ReadingStatus?
     
-    let gridLayout = [GridItem(.flexible()), GridItem(.flexible())]
+   
     
+    @AppStorage(SETTINGS_GRID_COLUMNS) private var gridColumns:Int = 2
     
+    //change to ocmputed varible {} a fucntion to return an array
+    var gridLayout:[GridItem] {
+        Array(repeating: GridItem(.flexible()), count: gridColumns)
+    }
     
+    //[GridItem(.flexible()), GridItem(.flexible())]
     
     //computed property: it is var that based on other value
     private var favoriteBooks: [Book]{
@@ -39,6 +45,7 @@ struct FavoritesView: View {
                     ForEach(favoriteBooks) { book in
                         
                         GridCard(book: book)
+                    
                     }
                 }
                 //CG float is type of the varible for the graphic property to render there
@@ -54,7 +61,7 @@ struct FavoritesView: View {
                     }
                     .sheet(isPresented: $showFilter){
                         // sheet slide up view
-                        FilterBooksView(selectedGenre: $selectedGenre, selectedStatus: $selectedStatus)
+                        FilterBooksView(selectedGenre: $selectedGenre, selectedStatus:  $selectedStatus)
                         
                         
                         

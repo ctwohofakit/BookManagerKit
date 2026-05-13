@@ -11,6 +11,7 @@ struct BookListItem: View {
     
     
     var book: Book
+    var showRating: Bool
     
     var body: some View {
         HStack{
@@ -24,12 +25,14 @@ struct BookListItem: View {
                 Text("by \(book.author)")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
-                HStack{
-                    Text("\(book.rating)")
-                        .font(.subheadline)
-                    Image(systemName: "star.fill")
-                        .resizable()
-                        .frame(width:10, height:10)
+                if showRating{
+                    HStack{
+                        Text("\(book.rating)")
+                            .font(.subheadline)
+                        Image(systemName: "star.fill")
+                            .resizable()
+                            .frame(width:10, height:10)
+                    }
                 }
             }
         }
@@ -39,5 +42,5 @@ struct BookListItem: View {
 
 //tool that acts like a parent view
 #Preview {
-    BookListItem(book: Book(title: "title", author: "author", coverImage: "lotr_fellowship", summary: "summary", rating: 3, review:"", isFavorite:true, genre: .fantasy))
+//    BookListItem(book: Book(title: "title", author: "author", coverImage: "lotr_fellowship", summary: "summary", rating: 3, review:"", isFavorite:true, genre: .fantasy, showRating: true))
 }

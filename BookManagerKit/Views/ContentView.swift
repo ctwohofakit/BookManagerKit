@@ -13,6 +13,26 @@ struct ContentView: View {
     //saves new Books
     @State private var books = getBooks()
     
+    //the name hsa to be the same, and default setting should be the same too
+    @AppStorage(SETTINGS_THEME) private var theme: Theme = .system
+
+    @AppStorage(SETTINGS_TINT_COLOR) private var tintColor: Color = SETTINGS_TINT_COLOR_VALUE
+    
+    //can be nil
+    //case theme.light: return ColorScheme.dark
+    //        input: output
+    var colorScheme: ColorScheme? {
+        switch(theme){
+            case .light: return .light
+            case .dark: return .dark
+            case .system: return nil
+            
+        }
+    }
+    
+    
+    
+    
     //controls the ADDBook
     //State varible, if state update, it will re-render
 /*
@@ -38,9 +58,17 @@ struct ContentView: View {
                         Label("Favorites", systemImage: "heart.fill")
                     }
                 
+                //setting view
+                SettingsView()
+                    .tabItem{
+                        Label("Settings", systemImage: "gearshape.fill")
+                    }
+                
                 
                 
             }
+            .preferredColorScheme(colorScheme)
+            .tint(tintColor)
             
         
 //        }

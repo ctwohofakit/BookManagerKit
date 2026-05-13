@@ -13,7 +13,7 @@ struct BookListView: View {
     @State private var showAddBook:Bool = false
     @State private var newBook = Book(title: "", author: "", coverImage: "lotr_fellowship", summary: "", rating: 1, review:"", isFavorite: false, genre: .fantasy)
     
-    
+    @AppStorage(SETTINGS_SHOW_RATING) private var showRating: Bool = SETTINGS_SHOW_RATING_VALUE
     
     var body: some View {
         NavigationStack{
@@ -21,7 +21,7 @@ struct BookListView: View {
             Text(newBook.title)
             List($books){ book in
                 NavigationLink(destination: BookDetailsView(book: book)){
-                    BookListItem(book: book.wrappedValue)
+                    BookListItem(book: book.wrappedValue, showRating: showRating)
                 }
                 
             }

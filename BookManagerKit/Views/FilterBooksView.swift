@@ -14,10 +14,11 @@ struct FilterBooksView: View {
     
     //maybe, Genre or maybe nil
     //no filter selcted = nil
+    //it pass it down to child compenent, and go up stream
     @Binding var selectedGenre: Genre?
     @Binding var selectedStatus: ReadingStatus?
     
-    //temp storage
+    //temp storage, it help show what is in the UI
     @State var tempGenre: Genre?
     @State var tempStatus: ReadingStatus?
     
