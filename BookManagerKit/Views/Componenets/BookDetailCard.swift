@@ -20,7 +20,8 @@ struct BookDetailCard: View {
                 .padding(.bottom)
             before
             Text(text)
-        }.frame(maxWidth:320, maxHeight:150)
+            Spacer()
+        }.frame(maxWidth:400, maxHeight:150)
             .padding()
             .background(.gray.opacity(0.2))
             .cornerRadius(10)

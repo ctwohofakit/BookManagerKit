@@ -10,18 +10,49 @@ import SwiftUI
 struct BookListItem: View {
     
     
-    var book: Book
+    var book: PersistentBook
     var showRating: Bool
+    var showStatus: Bool
+
+
+    var statusBackground: Color{
+        switch(book.readingStatus.rawValue){
+        case "Plan to read" : return .yellow
+        case "Reading" : return .purple
+        case "Finished" : return .green
+        case "Dropped" : return .red
+        case "Unknown" : return .primary
+        default : return .primary
+        }
+    }
+  
+    @AppStorage(SETTINGS_TITLE_SIZE) private var titleSize: TitleSize = SETTINGS_TITLE_SIZE_VALUE
+
+    var fontHead: Font{
+        switch(titleSize){
+        case .small : return .headline
+        case .medium : return .title2
+        case .big : return .title
+ 
+        }
+    }
+
+
     
     var body: some View {
         HStack{
-            Image(book.coverImage)
+            Image(uiImage: book.cover)
                 .resizable()
                 .scaledToFit()
                 .frame(width:60, height:80)
             VStack(alignment: .leading){
-                Text(book.title)
-                    .font(.headline)
+                HStack{
+                    Text(book.title)
+                        .font(fontHead)
+                    if showStatus{
+                        ColoredCapsule(text: book.readingStatus.rawValue, color: statusBackground)
+                    }
+                }
                 Text("by \(book.author)")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
@@ -42,5 +73,5 @@ struct BookListItem: View {
 
 //tool that acts like a parent view
 #Preview {
-//    BookListItem(book: Book(title: "title", author: "author", coverImage: "lotr_fellowship", summary: "summary", rating: 3, review:"", isFavorite:true, genre: .fantasy, showRating: true))
+    ContentView()
 }

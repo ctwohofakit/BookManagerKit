@@ -12,6 +12,7 @@ struct FilterBooksView: View {
     
     @Environment(\.dismiss) var dismiss
     
+    @State var clearBtn: Bool = false
     //maybe, Genre or maybe nil
     //no filter selcted = nil
     //it pass it down to child compenent, and go up stream
@@ -22,36 +23,45 @@ struct FilterBooksView: View {
     @State var tempGenre: Genre?
     @State var tempStatus: ReadingStatus?
     
+    
+    
     var body: some View {
         NavigationStack{
             Form{
-                Section("Select a genre"){
-                    //empty var to store the genre
-                Picker("Genre", selection: $tempGenre){
-                    
-                    //this is nil, but the nil belond to genre nil as Genre?
-                    Text("No genre selected").tag(nil as Genre?)
-                    ForEach(Genre.allCases, id:\.self){ genre in
-                        Text(genre.rawValue).tag(genre)
-                    }
-                    }
-                }
-                Section("Select a status"){
-                    Picker("Status", selection: $tempStatus){
-                        Text("No status selected").tag(nil as ReadingStatus?)
-                        ForEach(ReadingStatus.allCases, id:\.self){ readingStatus in
-                            Text(readingStatus.rawValue).tag(readingStatus)
+                
+              
+                    Section("Select a genre"){
+                        //empty var to store the genre
+                        
+ 
+                        Picker("Genre", selection: $tempGenre){
+                            //this is nil, but the nil belond to genre nil as Genre?
+                            Text("No genre selected").tag(nil as Genre?)
+                                ForEach(Genre.allCases, id:\.self){ genre in
+                                    Text(genre.rawValue).tag(genre)
+                                    
+                                }
+                            
+                         
                         }
                     }
+                    Section("Select a status"){
+                        Picker("Status", selection: $tempStatus){
+                            Text("No status selected").tag(nil as ReadingStatus?)
+                            ForEach(ReadingStatus.allCases, id:\.self){ readingStatus in
+                                Text(readingStatus.rawValue).tag(readingStatus)
+                                
+                            }
+                        }
+                        
+                        
+                        
+                        
+                        
+                    }
                     
                     
-                    
-                    
-                    
-                }
-                
-                
-                
+               
                 
             }
             .toolbar{
@@ -62,15 +72,16 @@ struct FilterBooksView: View {
                             dismiss()
                         }
                     }
-//                ToolbarItem(placement: cancellationAction){
+//                ToolbarItem(placement: .cancellationAction){
 //                    Button("Clear"){
-//                        
+//                        clearBtn.toggle()//
+//
 //                    }
-//                }
+                }
                 
                 
                 }//end tool bar
         }
         
-    }
 }
+

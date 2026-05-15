@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GridCard: View {
-    var book: Book
+    var book: PersistentBook
     
      var body: some View {
          VStack{
@@ -49,7 +49,7 @@ struct GridCard: View {
          }
          .frame(width: .infinity, height: .infinity)
          .background(
-            Image(book.coverImage)
+            Image(uiImage: book.cover)
                 .resizable()
                 .scaledToFill()
          )

@@ -13,7 +13,7 @@
  return result only is not
  
  */
-func filterFavoriteBook(book:[Book], genre:Genre?, readingStatus:ReadingStatus?)->[Book]{
+func filterFavoriteBook(book:[PersistentBook], genre:Genre?, readingStatus:ReadingStatus?)->[PersistentBook]{
     
         book.filter {book in
             book.isFavorite && (

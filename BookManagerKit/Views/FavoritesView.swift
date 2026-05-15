@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct FavoritesView: View {
     
-    @Binding var books: [Book]
+    @Query var books: [PersistentBook]
     @State private var showFilter:Bool = false
     @State var selectedGenre: Genre?
     @State var selectedStatus: ReadingStatus?
@@ -26,8 +27,8 @@ struct FavoritesView: View {
     //[GridItem(.flexible()), GridItem(.flexible())]
     
     //computed property: it is var that based on other value
-    private var favoriteBooks: [Book]{
-        filterFavoriteBook(book:books, genre: selectedGenre, readingStatus: selectedStatus)
+    private var favoriteBooks: [PersistentBook]{
+        filterFavoriteBook(book: books, genre: selectedGenre, readingStatus: selectedStatus)
 //        books.filter{
 //            //$0 is the first item
 //            $0.isFavorite

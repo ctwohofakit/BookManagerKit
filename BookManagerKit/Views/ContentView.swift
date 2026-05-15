@@ -11,12 +11,16 @@ import SwiftUI
 struct ContentView: View {
     //mocking data
     //saves new Books
-    @State private var books = getBooks()
+    //@State private var books = getBooks()
+    
+    
+    
     
     //the name hsa to be the same, and default setting should be the same too
     @AppStorage(SETTINGS_THEME) private var theme: Theme = .system
 
     @AppStorage(SETTINGS_TINT_COLOR) private var tintColor: Color = SETTINGS_TINT_COLOR_VALUE
+    
     
     //can be nil
     //case theme.light: return ColorScheme.dark
@@ -29,7 +33,27 @@ struct ContentView: View {
             
         }
     }
+
+ 
     
+    
+    /*
+     var colorBackground: Color? {
+     swith(readingStatus){
+        case .planToRead = .yellow
+         case .reading = .brown
+         case .finsihed = .green
+         case .dropped = .red
+         case .unknown = .primary
+     
+     }
+     }
+     
+     
+     
+     
+     
+     */
     
     
     
@@ -49,11 +73,11 @@ struct ContentView: View {
              */
             
             TabView{
-                BookListView(books: $books)
+                BookListView()
                     .tabItem{
                         Label("Books", systemImage: "books.vertical.fill")
                     }
-                FavoritesView(books: $books)
+                FavoritesView()
                     .tabItem{
                         Label("Favorites", systemImage: "heart.fill")
                     }
@@ -69,6 +93,7 @@ struct ContentView: View {
             }
             .preferredColorScheme(colorScheme)
             .tint(tintColor)
+       
             
         
 //        }

@@ -4,39 +4,34 @@
 //
 //  Created by Kit Sitou on 5/12/26.
 //
-/*
 
+import UIKit
 import SwiftData
-
-// this will add the id
+import Foundation
+ //this will add the id, so no need to inclue the UUID
 @Model
 
 class PersistentBook {
     var title: String
     var author: String
-    //image
+    //Image
     
     var summary: String
-    
-    //These are for assignment 2
     var rating: Int
     var review: String
-    
-    //106-1
     var isFavorite: Bool
-    
-    //106-2
     var genre: Genre
     var readingStatus: ReadingStatus
+    var coverData: Data?
     
     init(
-        title: String,
-         author: String,
+        title: String = "",
+        author: String = "",
         
         summary: String = "",
         rating: Int = 0,
         review: String = "",
-        isFavorite: Bool,
+        isFavorite: Bool = false,
         genre: Genre = .unknown,
         readingStatus: ReadingStatus = .unknown
         
@@ -45,13 +40,21 @@ class PersistentBook {
         self.title = title
         self.author = author
         self.summary = summary
+        self.rating = rating
+        self.review = review
         self.isFavorite = isFavorite
         self.genre = genre
         self.readingStatus = readingStatus
     }
     
     
-    
+    var cover: UIImage {
+        if self.coverData != nil {
+            return UIImage(data: self.coverData!)!
+        } else {
+            return UIImage(resource: .defaultBook)
+        }
+    }
     
 }
-*/
+

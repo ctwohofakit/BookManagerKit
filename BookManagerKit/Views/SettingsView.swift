@@ -22,6 +22,13 @@ struct SettingsView: View {
     
     @AppStorage(SETTINGS_TINT_COLOR) private var tintColor: Color = SETTINGS_TINT_COLOR_VALUE
     
+    @AppStorage(SETTINGS_SHOW_STATUS) private var showStatus: Bool = SETTINGS_SHOW_STATUS_VALUE
+    
+    @AppStorage(SETTINGS_TITLE_SIZE) private var titleSize: TitleSize = SETTINGS_TITLE_SIZE_VALUE
+    
+  
+    
+    
     var body: some View {
         //
         NavigationStack{
@@ -46,15 +53,29 @@ struct SettingsView: View {
                         Text("Show rating")
                     }
                 }
-                
+                // assignment 3
                 Section(header: Text("List Settings")){
+                    Toggle(isOn: $showStatus){
+                        Text("Show reading status")
+                    }
                     
-                    
+                    Picker("Title Size", selection: $titleSize){
+                        ForEach(TitleSize.allCases, id: \.self) { size in
+                            Text(size.rawValue).tag(size)
+                        }
+                    }
+
                 }
                 
+ 
             }
         }
         
         
     }
+}
+#Preview {
+    
+    ContentView()
+//        .modelContainer(for: Item.self, inMemory: true)
 }
