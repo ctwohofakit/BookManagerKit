@@ -102,14 +102,16 @@ struct AddEditView: View {
                     ImageField(imageData: $coverData)
                 }
                 
-                    Section(header:Text("My Rating and Review")){
-                        Picker("Rating", selection:$rating){
-                            Text("★").tag(1)
-                            Text("★★").tag(2)
-                            Text("★★★").tag(3)
-                            Text("★★★★").tag(4)
-                            Text("★★★★★").tag(5)
-                        }.pickerStyle(.menu)
+                Section(header:Text("My Rating and Review")){
+                    StarRatingField(rating: $rating)
+                
+//                        Picker("Rating", selection:$rating){
+//                            Text("★").tag(1)
+//                            Text("★★").tag(2)
+//                            Text("★★★").tag(3)
+//                            Text("★★★★").tag(4)
+//                            Text("★★★★★").tag(5)
+//                        }.pickerStyle(.menu)
                         //                    HStack{
                         //                        ForEach(1...5, id:\.self){ index in
                         //                            Image(systemName: index <= rating ? "star.fill": "star")

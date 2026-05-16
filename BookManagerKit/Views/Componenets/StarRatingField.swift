@@ -10,6 +10,12 @@ import SwiftUI
 
 struct StarRatingField: View {
     @Binding var rating: Int
+    
+//    private func starLevel(index : Int) -> String {
+//        return index <= rating ?  "star.fill": "star"
+//    }
+//    
+    
     public var body: some View {
         HStack{
             ForEach(1...5, id:\.self){ index in
@@ -19,6 +25,9 @@ struct StarRatingField: View {
                     Image(systemName: index <= rating ? "star.fill": "star")
                         .font(.title2)
                         .foregroundStyle(.yellow)
+                    
+                }.onTapGesture {
+                    rating = index
                 }.buttonStyle(.plain)
             }
         }
